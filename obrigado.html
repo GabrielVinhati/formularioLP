@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%236366f1' rx='20'/><text x='50%25' y='52%25' font-size='70' text-anchor='middle' dominant-baseline='middle'>🚀</text></svg>">
+  <title>Briefing recebido · Rocket Lab Hub</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f8fafc; --bg-elev: #ffffff; --border: #e2e8f0;
+      --text: #0f172a; --text-muted: #475569; --text-soft: #64748b;
+      --accent: #6366f1; --accent-hover: #4f46e5; --accent-soft: #eef2ff;
+      --success: #16a34a; --success-soft: #dcfce7;
+    }
+    [data-theme="dark"] {
+      --bg: #0b1220; --bg-elev: #111827; --border: #1f2937;
+      --text: #f1f5f9; --text-muted: #cbd5e1; --text-soft: #94a3b8;
+      --accent: #818cf8; --accent-hover: #a5b4fc; --accent-soft: rgba(129, 140, 248, 0.12);
+      --success: #4ade80; --success-soft: rgba(74, 222, 128, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      -webkit-font-smoothing: antialiased;
+    }
+    .card {
+      max-width: 520px;
+      width: 100%;
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 32px;
+      text-align: center;
+      box-shadow: 0 8px 32px -8px rgba(15, 23, 42, 0.12);
+    }
+    [data-theme="dark"] .card { box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.5); }
+
+    .icon-wrap {
+      width: 72px; height: 72px;
+      margin: 0 auto 22px;
+      border-radius: 50%;
+      background: var(--success-soft);
+      color: var(--success);
+      display: grid; place-items: center;
+    }
+    .icon-wrap svg { width: 36px; height: 36px; }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0 0 12px;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin: 0 0 24px;
+      line-height: 1.6;
+    }
+
+    .next-steps {
+      text-align: left;
+      background: var(--accent-soft);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+    }
+    .next-steps h2 {
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 10px;
+      font-weight: 700;
+    }
+    .next-steps ol {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .next-steps li { margin-bottom: 6px; }
+    .next-steps li:last-child { margin-bottom: 0; }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 15px;
+      transition: all 0.15s ease;
+    }
+    .btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+    .footer {
+      margin-top: 22px;
+      color: var(--text-soft);
+      font-size: 12.5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="icon-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </div>
+
+  <h1>Briefing recebido!</h1>
+  <p class="subtitle">
+    Recebemos todas as informações do seu projeto. Em breve entraremos em contato pelo WhatsApp pra confirmar os próximos passos.
+  </p>
+
+  <div class="next-steps">
+    <h2>O que acontece agora</h2>
+    <ol>
+      <li>Vamos analisar seu briefing nas próximas <strong>24h úteis</strong></li>
+      <li>Te chamamos no WhatsApp pra alinhar materiais (logo, fotos) e pagamento inicial</li>
+      <li>Após confirmação, o site fica pronto em até <strong>7 dias úteis</strong></li>
+    </ol>
+  </div>
+
+  <a class="btn" href="index.html">Voltar ao início</a>
+
+  <div class="footer">© Rocket Lab Hub</div>
+</div>
+
+<script>
+  /* Aplica preferência de tema salva */
+  (function () {
+    try {
+      const saved = localStorage.getItem('theme-pref');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    } catch (e) {}
+  })();
+</script>
+
+</body>
+</html>
