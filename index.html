@@ -489,14 +489,7 @@
     <p>Preencha o briefing abaixo com o máximo de detalhes possível. Quanto mais clara sua visão, mais alinhado o resultado vai ficar. Tempo médio: <strong>10 minutos</strong>.</p>
   </section>
 
-  <form action="https://formsubmit.co/Gabriel.Vinhati@outlook.com" method="POST" id="briefingForm" novalidate>
-
-    <!-- ── FormSubmit config ─────────────────────────────────── -->
-    <input type="hidden" name="_subject" value="Novo briefing de Landing Page">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_next" value="https://formulario-lp-sable.vercel.app/obrigado.html">
-    <input type="hidden" name="_autoresponse" value="Recebemos seu briefing! Em até 24h úteis vamos retornar com a confirmação dos próximos passos. — Rocket Lab Hub">
+  <form action="/api/submit" method="POST" id="briefingForm" novalidate>
 
     <!-- Honeypot anti-spam -->
     <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
@@ -948,14 +941,51 @@
       return true;
     }
 
+    async function submitForm() {
+      const originalLabel = btnNext.innerHTML;
+      btnNext.disabled = true;
+      btnBack.disabled = true;
+      btnNext.innerHTML = 'Enviando…';
+
+      // Serializa form em objeto JSON (agregando arrays pra checkboxes)
+      const fd = new FormData(form);
+      const payload = {};
+      for (const [k, v] of fd.entries()) {
+        if (payload[k] === undefined)      payload[k] = v;
+        else if (Array.isArray(payload[k])) payload[k].push(v);
+        else                                payload[k] = [payload[k], v];
+      }
+
+      try {
+        const resp = await fetch('/api/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (!resp.ok) {
+          const err = await resp.json().catch(() => ({}));
+          throw new Error(err.error || `HTTP ${resp.status}`);
+        }
+
+        try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+        window.location.href = 'obrigado.html';
+      } catch (err) {
+        console.error('[submit] error:', err);
+        btnNext.disabled = false;
+        btnBack.disabled = false;
+        btnNext.innerHTML = originalLabel;
+        alert('Não foi possível enviar agora. Tente novamente em alguns instantes.\n\nDetalhe: ' + err.message);
+      }
+    }
+
     btnNext.addEventListener('click', () => {
       if (!validateCurrentStep()) return;
       saveDraft();
 
       if (current === total - 1) {
-        // Último step: submeter form
-        form.submit();
-        try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+        // Último step: submeter via fetch
+        submitForm();
         return;
       }
       current++;
@@ -974,6 +1004,12 @@
         e.preventDefault();
         btnNext.click();
       }
+    });
+
+    // Safety: previne submit nativo caso algo dispare
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (current === total - 1 && validateCurrentStep()) submitForm();
     });
 
     /* ── Auto-save em localStorage ─────────────────────────── */
