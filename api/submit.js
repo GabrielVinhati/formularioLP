@@ -143,9 +143,10 @@ export default async function handler(req, res) {
     }
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const toEmail = process.env.TO_EMAIL;
-  const fromEmail = process.env.FROM_EMAIL || 'Briefing <onboarding@resend.dev>';
+  // Aceita env vars em maiusculas ou minusculas (Vercel as vezes restringe ao lower case)
+  const apiKey    = process.env.RESEND_API_KEY || process.env.resend_api_key;
+  const toEmail   = process.env.TO_EMAIL       || process.env.to_email;
+  const fromEmail = process.env.FROM_EMAIL     || process.env.from_email || 'Briefing <onboarding@resend.dev>';
 
   if (!apiKey || !toEmail) {
     console.error('[submit] env vars ausentes:', { hasKey: !!apiKey, hasTo: !!toEmail });
